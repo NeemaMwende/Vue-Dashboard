@@ -9,7 +9,7 @@ import profile from '@/pages/profile.vue'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: home
   },
