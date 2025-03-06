@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen w-full flex text-white">
     <!-- sidebar  -->
-    <div class="w-[300px] min-h-screen bg-gray-200 text-white flex flex-col">
+    <div :class="[sidebarOpen ? 'w-[300px]' : 'w-0 -ml-1', 'min-h-screen bg-gray-200 text-white flex flex-col transition-all duration-300']">
       <div class="h-[60px] bg-gray-900 flex items-center">
         <div class="px-[20px]">
           <h3 class="font-bold text-xl">Admin Dashboard</h3>
@@ -59,18 +59,81 @@
       </div>
     </div>
     
+    <!-- Main Content Section -->
     <div class="flex-1 flex flex-col">
-      <div class="h-[60px] bg-gray-800 flex items-center justify-end px-[20px]">
-        <div class="flex items-center gap-4">
-          <div class="relative cursor-pointer">
-            <svg class="w-[22px] h-[22px]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+      <!-- Header -->
+      <div class="h-[60px] bg-gray-800 flex items-center justify-between px-4 md:px-6">
+        <!-- Hamburger Menu -->
+        <div class="flex items-center relative">
+          <button @click="toggleSidebar" class="text-white focus:outline-none relative">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
-            <span class="absolute top-0 right-0 h-[10px] w-[10px] bg-red-500 rounded-full"></span>
+          </button>
+          
+          <!-- Hamburger Dropdown Menu -->
+          <div v-show="showHamburgerMenu" class="absolute left-0 top-10 z-10 mt-2 w-48 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div class="py-1 text-left" role="none">
+              <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Account Settings</a>
+              <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Support</a>
+              <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Licenses</a>
+              <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem">Help</a>
+            </div>
           </div>
-          <div class="w-[40px] h-[40px] bg-gray-300 rounded-full cursor-pointer"></div>
+        </div>
+        
+        <!-- Search Bar - Centered -->
+        <div class="hidden md:flex items-center justify-center flex-1 mx-4">
+          <div class="relative w-full max-w-md">
+            <input type="text" class="bg-gray-700 text-white w-full pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search..." />
+            <div class="absolute left-3 top-2.5">
+              <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mobile Search Toggle -->
+        <div class="md:hidden">
+          <button @click="toggleSearch" class="text-white focus:outline-none mx-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <!-- User Profile -->
+        <div class="relative">
+          <div class="flex items-center justify-end space-x-2 md:space-x-4">
+            <div class="relative hidden md:block">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
+              </svg>
+              <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+            </div>
+            <img class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gray-50 object-cover" src="https://i.pravatar.cc/100" alt="Avatar" />
+            <div class="hidden md:block font-semibold text-left">
+              <div class="text-sm">Angel, Dev OP</div>
+              <div class="text-xs text-gray-400">Admin</div>
+            </div>
+          </div>
         </div>
       </div>
+      
+      <!-- Mobile Search Bar (Hidden by Default) -->
+      <div v-if="showSearch" class="md:hidden bg-gray-700 px-4 py-2">
+        <div class="relative">
+          <input type="text" class="bg-gray-600 text-white w-full pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search..." />
+          <div class="absolute left-3 top-2.5">
+            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main Content Area -->
       <div class="flex-1 bg-gray-100 text-gray-800 p-[24px] overflow-auto">
         <router-view></router-view>
       </div>
@@ -81,6 +144,26 @@
 <script>
 export default {
   name: 'App',
+  data() {
+    return {
+      showDropDown: false,
+      showSearch: false,
+      showHamburgerMenu: false,
+      sidebarOpen: true
+    }
+  },
+  methods: {
+    toggleDrop() {
+      this.showDropDown = !this.showDropDown;
+    },
+    toggleSearch() {
+      this.showSearch = !this.showSearch;
+    },
+    toggleSidebar() {
+      this.sidebarOpen = !this.sidebarOpen;
+      this.showHamburgerMenu = !this.showHamburgerMenu;
+    }
+  }
 }
 </script>
 
@@ -97,4 +180,11 @@ html, body {
   height: 100vh;
   width: 100vw;
 }
+
+@media (max-width: 768px) {
+  .custom-width {
+    width: 240px;
+  }
+}
+
 </style>
