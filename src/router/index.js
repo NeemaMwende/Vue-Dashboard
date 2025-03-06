@@ -8,20 +8,23 @@ import home from '@/pages/home.vue'
 import profile from '@/pages/profile.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: home
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: profile
-  },
+ 
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: dashboard
+    component: dashboard,
+    children: [
+      {
+        path: '/',
+        name: 'home',
+        component: home
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: profile
+      },
+    ]
   },
   // {
   //   path: '/users',
