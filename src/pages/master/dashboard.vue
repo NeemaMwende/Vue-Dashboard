@@ -1,10 +1,10 @@
 <template>
   <div class="min-h-screen w-full flex text-white">
     <!-- sidebar  -->
-    <div :class="[sidebarOpen ? 'w-[300px]' : 'w-0 -ml-1', 'min-h-screen bg-gray-200 text-white flex flex-col transition-all duration-300']">
+    <div :class="[sidebarOpen ? 'w-[300px]' : 'w-0 md:w-[70px]', 'min-h-screen bg-gray-200 text-white flex flex-col transition-all duration-300 overflow-hidden']">
       <div class="h-[60px] bg-gray-900 flex items-center">
         <div class="px-[20px]">
-          <h3 class="font-bold text-xl">Admin Dashboard</h3>
+          <h3 class="font-bold text-xl whitespace-nowrap">Admin Dashboard</h3>
         </div>
       </div>
       <div class="flex-1 bg-gray-800 flex flex-col">
@@ -14,7 +14,7 @@
               <svg aria-hidden="true" class="mr-3 w-[22px] h-[22px]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
               </svg>
-              Home
+              <span :class="[!sidebarOpen && 'md:hidden', 'whitespace-nowrap']">Home</span>
             </router-link>
             
             <router-link to="/reports" class="inline-flex relative items-center py-[12px] px-[12px] w-full text-sm font-medium hover:bg-gray-700 rounded-md transition-colors">
@@ -22,37 +22,37 @@
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>
-              Reports
+              <span :class="[!sidebarOpen && 'md:hidden', 'whitespace-nowrap']">Reports</span>
             </router-link>
             
             <router-link to="/profile" class="inline-flex relative items-center py-[12px] px-[12px] w-full text-sm font-medium hover:bg-gray-700 rounded-md transition-colors">
               <svg aria-hidden="true" class="mr-3 w-[22px] h-[22px]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
               </svg>
-              Profile
+              <span :class="[!sidebarOpen && 'md:hidden', 'whitespace-nowrap']">Profile</span>
             </router-link>
             
-            <router-link to="/notifications" class="inline-flex relative items-center py-[12px] px-[12px] w-full text-sm font-medium hover:bg-gray-700 rounded-md transition-colors">
+            <!-- <router-link to="/notifications" class="inline-flex relative items-center py-[12px] px-[12px] w-full text-sm font-medium hover:bg-gray-700 rounded-md transition-colors">
               <svg aria-hidden="true" class="mr-3 w-[22px] h-[22px]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
               </svg>
-              Notifications
-            </router-link>
-          </div>
+              <span :class="[!sidebarOpen && 'md:hidden', 'whitespace-nowrap']">Notifications</span>
+            </router-link> -->
 
-          <div class="mt-auto pt-6 mb-2">
             <router-link to="/settings" class="inline-flex relative items-center py-[12px] px-[12px] w-full text-sm font-medium hover:bg-gray-700 rounded-md transition-colors">
               <svg aria-hidden="true" class="mr-3 w-[22px] h-[22px]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"></path>
               </svg>
-              Settings
+              <span :class="[!sidebarOpen && 'md:hidden', 'whitespace-nowrap']">Settings</span>
             </router-link>
+          </div>
 
+          <div class="pt-6">
             <router-link to="/logout" class="inline-flex relative items-center py-[12px] px-[12px] w-full text-sm font-medium hover:bg-gray-700 rounded-md mt-4 transition-colors">
               <svg aria-hidden="true" class="mr-3 w-[22px] h-[22px]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V4a1 1 0 00-1-1H3zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
               </svg>
-              Logout
+              <span :class="[!sidebarOpen && 'md:hidden', 'whitespace-nowrap']">Logout</span>
             </router-link>
           </div>
         </div>
@@ -211,7 +211,7 @@ export default {
       isSpeechRecognitionSupported: false,
       searchResults: [],
       searchPerformed: false,
-      // Sample data for demonstration - in a real app, this would come from an API or Vuex store
+      // Sample data for demonstration
       sampleData: [
         { 
           title: "Dashboard Overview", 
@@ -257,15 +257,15 @@ export default {
       if (SpeechRecognition) {
         this.isSpeechRecognitionSupported = true;
         this.recognition = new SpeechRecognition();
-        this.recognition.continuous = false; // Stops automatically after speech input
-        this.recognition.interimResults = false; // Only final results
-        this.recognition.lang = "en-US"; // Set language to English
+        this.recognition.continuous = false; 
+        this.recognition.interimResults = false; 
+        this.recognition.lang = "en-US"; 
         
         // Set up event handlers
         this.recognition.onresult = (event) => {
-          const speechResult = event.results[0][0].transcript; // Get recognized text
-          this.searchQuery = speechResult; // Update search query
-          this.isListening = false; // Update listening state
+          const speechResult = event.results[0][0].transcript; 
+          this.searchQuery = speechResult; 
+          this.isListening = false;
           
           // Automatically perform search when voice input completes
           this.performSearch();
@@ -277,7 +277,7 @@ export default {
         };
         
         this.recognition.onend = () => {
-          this.isListening = false; // Update listening state when recognition ends
+          this.isListening = false; 
         };
       } else {
         console.log("Speech recognition is not supported in this browser.");
@@ -309,8 +309,6 @@ export default {
       this.searchPerformed = true;
       const query = this.searchQuery.toLowerCase();
       
-      // Filter sample data based on query
-      // In a real application, this might be an API call or more complex search logic
       this.searchResults = this.sampleData.filter(item => {
         return (
           item.title.toLowerCase().includes(query) ||
@@ -318,10 +316,6 @@ export default {
         );
       });
       
-      // In a real app, you might also want to use Vue Router to update the URL query params
-      // this.$router.push({ query: { q: this.searchQuery } });
-      
-      // Close mobile search panel after search
       if (this.showSearch && window.innerWidth < 768) {
         this.showSearch = false;
       }

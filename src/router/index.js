@@ -6,6 +6,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import dashboard from '@/pages/master/dashboard.vue'
 import home from '@/pages/home.vue'
 import profile from '@/pages/profile.vue'
+import reports from '@/pages/reports.vue'
+import settings from '@/pages/settings.vue'
 
 const routes = [
  
@@ -23,6 +25,16 @@ const routes = [
         path: '/profile',
         name: 'profile',
         component: profile
+      },
+      {
+        path: '/settings',
+        name: 'settings',
+        component: settings
+      },
+      {
+        path: '/reports',
+        name: 'reports',
+        component: reports
       },
     ]
   },

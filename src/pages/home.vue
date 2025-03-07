@@ -26,12 +26,19 @@
 
     <!-- Action Buttons -->
     <div class="flex space-x-4 mt-8">
-      <button class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-700">
+      <router-link 
+        to="/reports" 
+        class="w-40 text-center bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors flex items-center justify-center"
+      >
         View Reports
-      </button>
-      <button class="bg-gray-600 text-white px-6 py-2 rounded-lg shadow-md hover:bg-gray-700">
+      </router-link>
+
+      <router-link 
+        to="/settings" 
+        class="w-40 text-center bg-gray-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gray-700 transition-colors flex items-center justify-center"
+      >
         Settings
-      </button>
+      </router-link>
     </div>
   </div>
 </template>
