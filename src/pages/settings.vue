@@ -41,12 +41,13 @@
               <input type="text" v-model="settings.account.username" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
             </div>
             
-            <div>
+            <!-- <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Change Password</label>
               <input type="password" placeholder="Current password" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-2" />
               <input type="password" placeholder="New password" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-2" />
               <input type="password" placeholder="Confirm new password" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
-            </div>
+            </div> -->
+            <PasswordList/>
             
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Two-Factor Authentication</label>
@@ -147,8 +148,13 @@
 </template>
 
 <script>
+import PasswordList from './PasswordList';
+
 export default {
   name: 'SettingsView',
+  components: {
+    PasswordList
+  },
   data() {
     return {
       activeCategory: 'account',
